@@ -43,7 +43,7 @@ jobs:
           command: |
             set -x
             FULL_DOCKER_IMAGE_NAME=$(cat full_docker_image_name)
-            docker run -d --rm -p 8080:8080 --name hello-app $FULL_DOCKER_IMAGE_NAME
+            docker run -d --rm -p 8080:8080 --name hello-app gcr.io/pantheon-csapps/$FULL_DOCKER_IMAGE_NAME
             docker run --network container:hello-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
             if [ "${CIRCLE_BRANCH}" != "master" ]
             then
