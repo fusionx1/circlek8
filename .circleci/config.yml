@@ -24,7 +24,7 @@ jobs:
           name: Build image
           command: |
             FULL_DOCKER_IMAGE_NAME=$(cat full_docker_image_name)
-            docker build -t $FULL_DOCKER_IMAGE_NAME -f hello-app/Dockerfile hello-app/
+            docker build -t gcr.io/pantheon-csapps/$FULL_DOCKER_IMAGE_NAME -f hello-app/Dockerfile hello-app/
       - run:
           name: Push image
           command: |
@@ -34,7 +34,7 @@ jobs:
               echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
               gcloud auth activate-service-account --key-file gcloud-service-key.json
               gcloud --quiet auth configure-docker
-              docker push $FULL_DOCKER_IMAGE_NAME
+              docker push gcr.io/pantheon-csapps/$FULL_DOCKER_IMAGE_NAME
             else
               echo "Not master branch; skipping image push.."
             fi
@@ -69,7 +69,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > gcloud-service-key.json
+            echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
             set -x
             gcloud auth activate-service-account --key-file gcloud-service-key.json
             gcloud --quiet config set project $GOOGLE_PROJECT_ID
