@@ -77,7 +77,7 @@ jobs:
             EXISTING_CLUSTER=$(gcloud container clusters list --format="value(name)" --filter="name=$GOOGLE_CLUSTER_NAME")
             if [ "${EXISTING_CLUSTER}" != $GOOGLE_CLUSTER_NAME ]
             then
-              # Create cluster if it doesn't already exist
+              # Create cluster if it doesn't already exist.
               gcloud --quiet container clusters create $GOOGLE_CLUSTER_NAME --num-nodes=1
             else
               gcloud --quiet container clusters get-credentials $GOOGLE_CLUSTER_NAME
