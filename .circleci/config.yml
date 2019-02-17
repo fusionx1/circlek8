@@ -36,7 +36,7 @@ jobs:
               gcloud --quiet auth configure-docker
               docker push gcr.io/pantheon-csapps/$FULL_DOCKER_IMAGE_NAME
             else
-              echo "Not master branch; skipping image push.."
+              echo "Not master branch; skipping image push..."
             fi
       - run:
           name: Test local image
