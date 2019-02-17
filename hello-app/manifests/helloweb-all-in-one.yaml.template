@@ -28,6 +28,6 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: DOCKER_IMAGE_NAME
+        image: gcr.io/pantheon-csapps/DOCKER_IMAGE_NAME
         ports:
         - containerPort: 8080
